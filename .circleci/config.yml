@@ -37,11 +37,14 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
-      # run tests!
       - run: mvn verify -Psurefire
       
       - store_test_results: 
           path: target/surefire-reports
+
+      - run: "mvn cobertura:cobertura"
       
+      - run: mvn package
+
       - store_artifacts: 
-          path: ibox-1.0.jar
+          path: target/ibox-1.0.jar
