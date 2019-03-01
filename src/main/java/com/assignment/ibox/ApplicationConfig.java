@@ -23,8 +23,6 @@ import com.google.api.services.drive.DriveScopes;
 
 @Configuration
 public class ApplicationConfig {
-	private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"), ".store/drive_sample");
-
 	@Autowired
 	private GoogleDriveProps googleDriveProps;
 
@@ -37,7 +35,7 @@ public class ApplicationConfig {
 
 		try {
 			httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-			dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
+			dataStoreFactory = new FileDataStoreFactory(new java.io.File("./store/drive_sample"));
 
 			GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(httpTransport, JSON_FACTORY, googleDriveProps.getClientId(),
 					googleDriveProps.getClientSecret(), Collections.singleton(DriveScopes.DRIVE_FILE)).setDataStoreFactory(dataStoreFactory).build();
