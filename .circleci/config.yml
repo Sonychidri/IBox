@@ -43,6 +43,8 @@ jobs:
           path: target/surefire-reports
 
       - run: "mvn cobertura:cobertura"
+
+      - run: "mvn checkstyle:checkstyle"
       
       - run: mvn package
 
